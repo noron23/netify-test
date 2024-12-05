@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #231C1A;
+    height:80px; 
+    width:100%;
+}
+
+header a {
+    color:white;
+    text-decoration: none;
+}
+
+header a:hover{
+    text-decoration: underline;
+}
+
+header li{
+    display:inline;
+    margin-right:4vw;
+    
+}
+
+h1 {
+    color:white;
+}

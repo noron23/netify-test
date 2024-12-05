@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<head>
+    <script>
+        images = ["https://cms.rhinoshield.app/public/images/ip_page_spongebob_icon_b310ce2b5a.jpg","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmCoPXzBG04RrE7thPLkmWK1uJWppVM4EJ3g&s", "https://megapx-assets.dcard.tw/images/e596f5ac-5f77-4c67-a6ee-5ee3bf00379d/1280.webp"]
+        
+        i = 0
+
+        function change_array(x){
+
+            index =  i = (i + x + images.length) % images.length
+ 
+            document.getElementById("id").innerHTML = '<img src = "' + images[i] + '" width=250 height=250>'
+        }
+        
+       
+        
+    </script>
+</head>
+
+<body>
+    <p id="test">這邊是測試優</p>
+    <div id="id">
+        <img src="https://cms.rhinoshield.app/public/images/ip_page_spongebob_icon_b310ce2b5a.jpg" alt="海綿寶寶" width=250 height=250>
+    </div>
+
+    <div>
+        <button onclick="javascript:change_array(1)">上一頁</button>
+        <button onclick="javascript:change_array(-1)">下一頁</button> 
+    </div>
+    
+</body>

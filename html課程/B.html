@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Import Google Chart Loader -->
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        // 全域變數
+        let titles = [];
+        let images = [];
+        let intros = [];
+
+        // 初始化 Google Chart
+        google.charts.load('current', { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(fetchData);
+
+        function fetchData() {
+          const url = 'https://docs.google.com/spreadsheets/d/你的試算表ID/gviz/tq?sheet=工作表1';
+          const query = new google.visualization.Query(url);
+          query.setQuery('select *'); // 獲取所有資料
+          query.send(processSheetsData);
+        }
+
+        function processSheetsData(response) {
+          const data = response.getDataTable();
+          const rows = data.getNumberOfRows();
+
+          // 將資料存入陣列
+          for (let r = 1; r < rows; r++) {
+            titles.push(data.getFormattedValue(r, 1));
+            images.push(data.getFormattedValue(r, 2));
+            intros.push(data.getFormattedValue(r, 3));
+          }
+
+          displayDetails();
+        }
+
+        function getQueryParam(param) {
+          const urlParams = new URLSearchParams(window.location.search);
+          return urlParams.get(param);
+        }
+
+        function displayDetails() {
+          const pid = parseInt(getQueryParam('pid'));
+
+          if (!isNaN(pid) && pid >= 0 && pid < titles.length) {
+            document.getElementById('title').innerText = titles[pid];
+            document.getElementById('image').src = images[pid];
+            document.getElementById('intro').innerText = intros[pid];
+          } else {
+            document.getElementById('title').innerText = '無效的項目';
+            document.getElementById('image').alt = '無圖片';
+            document.getElementById('intro').innerText = '沒有找到相關內容。';
+          }
+        }
+    </script>
+</head>
+<body>
+    <h1 id="title"></h1>
+    <img id="image" alt="Image" style="max-width: 100%; height: auto;">
+    <p id="intro"></p>
+</body>
+</html>
